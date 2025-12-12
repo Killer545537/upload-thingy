@@ -1,0 +1,73 @@
+{
+    "$schema": "https://biomejs.dev/schemas/2.2.0/schema.json",
+    "assist": {
+        "actions": {
+            "source": {
+                "organizeImports": "on",
+                "useSortedAttributes": "on",
+                "useSortedKeys": "on",
+                "useSortedProperties": "on"
+            }
+        }
+    },
+    "css": {
+        "linter": {
+            "enabled": true
+        }
+    },
+    "files": {
+        "ignoreUnknown": true,
+        "includes": [
+            "**",
+            "!node_modules",
+            "!.next",
+            "!next.config.ts",
+            "!dist",
+            "!build",
+            "!package.json",
+            "!components.json"
+        ]
+    },
+    "formatter": {
+        "enabled": true,
+        "indentStyle": "space",
+        "indentWidth": 4
+    },
+    "javascript": {
+        "formatter": {
+            "jsxQuoteStyle": "single",
+            "quoteStyle": "single",
+            "semicolons": "always",
+            "trailingCommas": "all"
+        }
+    },
+    "linter": {
+        "domains": {
+            "next": "recommended",
+            "react": "recommended"
+        },
+        "enabled": true,
+        "rules": {
+            "a11y": {
+                "noSvgWithoutTitle": "off"
+            },
+            "complexity": {
+                "useArrowFunction": "error"
+            },
+            "recommended": true,
+            "style": {
+                "noNonNullAssertion": "off"
+            },
+            "suspicious": {
+                "noArrayIndexKey": "off",
+                "noImplicitAnyLet": "off",
+                "noUnknownAtRules": "off"
+            }
+        }
+    },
+    "vcs": {
+        "clientKind": "git",
+        "enabled": true,
+        "useIgnoreFile": true
+    }
+}
