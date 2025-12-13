@@ -55,6 +55,9 @@
             "complexity": {
                 "useArrowFunction": "error"
             },
+            "correctness": {
+                "useHookAtTopLevel": "off"
+            },
             "recommended": true,
             "style": {
                 "noNonNullAssertion": "off"
