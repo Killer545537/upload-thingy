@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
     description: 'Simple file uploader built with Uploadthing and Next.js',
-    title: 'Upload Thingy',
+    title: 'UploadThingy',
 };
 
 export default function RootLayout({

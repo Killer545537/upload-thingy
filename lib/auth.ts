@@ -17,9 +17,9 @@ export const auth = betterAuth({
             create: {
                 after: async (user) => {
                     await resend.emails.send({
-                        from: 'Upload Thingy <onboarding@resend.dev>',
+                        from: 'UploadThingy <onboarding@resend.dev>',
                         react: WelcomeEmail({ name: user.name }),
-                        subject: 'Welcome to Upload Thingy!',
+                        subject: 'Welcome to UploadThingy!',
                         to: user.email,
                     });
                 },
@@ -31,7 +31,7 @@ export const auth = betterAuth({
         requireEmailVerification: false,
         sendResetPassword: async ({ user, url }) => {
             await resend.emails.send({
-                from: 'Upload Thingy <password@resend.dev>',
+                from: 'UploadThingy <password@resend.dev>',
                 react: PasswordResetEmail({ name: user.name, resetUrl: url }),
                 subject: 'Reset your password',
                 to: user.email,

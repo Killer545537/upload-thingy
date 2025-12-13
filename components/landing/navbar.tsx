@@ -27,7 +27,7 @@ const Navbar = () => {
                     className='text-xl font-bold tracking-tighter-custom text-foreground'
                     href='/'
                 >
-                    Upload Thingy
+                    UploadThingy
                 </a>
 
                 {/* Desktop Navigation */}

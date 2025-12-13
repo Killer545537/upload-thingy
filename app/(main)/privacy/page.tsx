@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
     description:
-        'Learn how Upload Thingy protects your privacy and handles your data.',
+        'Learn how UploadThingy protects your privacy and handles your data.',
     title: 'Privacy Policy',
 };
 
@@ -34,13 +34,12 @@ const PrivacyPage = () => {
                                 Introduction
                             </h2>
                             <p className='text-muted-foreground leading-relaxed'>
-                                At Upload Thingy, we take your privacy
-                                seriously. This Privacy Policy explains how we
-                                collect, use, disclose, and safeguard your
-                                information when you use our file storage
-                                service. Please read this policy carefully to
-                                understand our practices regarding your personal
-                                data.
+                                At UploadThingy, we take your privacy seriously.
+                                This Privacy Policy explains how we collect,
+                                use, disclose, and safeguard your information
+                                when you use our file storage service. Please
+                                read this policy carefully to understand our
+                                practices regarding your personal data.
                             </p>
                         </section>
 

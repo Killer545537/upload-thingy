@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    description: 'Read the terms and conditions for using Upload Thingy.',
+    description: 'Read the terms and conditions for using UploadThingy.',
     title: 'Terms of Service',
 };
 
@@ -33,8 +33,8 @@ const TermsPage = () => {
                                 Agreement to Terms
                             </h2>
                             <p className='text-muted-foreground leading-relaxed'>
-                                By accessing or using Upload Thingy, you agree
-                                to be bound by these Terms of Service. If you
+                                By accessing or using UploadThingy, you agree to
+                                be bound by these Terms of Service. If you
                                 disagree with any part of these terms, you may
                                 not access our service. These terms apply to all
                                 visitors, users, and others who access or use
@@ -47,7 +47,7 @@ const TermsPage = () => {
                                 Use of Service
                             </h2>
                             <p className='text-muted-foreground leading-relaxed mb-4'>
-                                You agree to use Upload Thingy only for lawful
+                                You agree to use UploadThingy only for lawful
                                 purposes. You are prohibited from:
                             </p>
                             <ul className='list-disc list-inside text-muted-foreground space-y-2'>
@@ -93,7 +93,7 @@ const TermsPage = () => {
                             </h2>
                             <p className='text-muted-foreground leading-relaxed'>
                                 You retain all ownership rights to the content
-                                you upload to Upload Thingy. By uploading
+                                you upload to UploadThingy. By uploading
                                 content, you grant us a limited license to
                                 store, process, and display your files solely
                                 for the purpose of providing our service to you.
@@ -120,7 +120,7 @@ const TermsPage = () => {
                                 Limitation of Liability
                             </h2>
                             <p className='text-muted-foreground leading-relaxed'>
-                                Upload Thingy is provided "as is" without
+                                UploadThingy is provided "as is" without
                                 warranties of any kind. We shall not be liable
                                 for any indirect, incidental, special, or
                                 consequential damages arising from your use of
@@ -152,7 +152,7 @@ const TermsPage = () => {
                                 We reserve the right to modify these terms at
                                 any time. We will notify users of significant
                                 changes via email or through the service. Your
-                                continued use of Upload Thingy after changes
+                                continued use of UploadThingy after changes
                                 constitutes acceptance of the new terms.
                             </p>
                         </section>

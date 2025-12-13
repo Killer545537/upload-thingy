@@ -6,8 +6,8 @@ export const metadata: Metadata = {
     description:
         'The simplest way to upload, secure, and retrieve your digital assets.',
     title: {
-        default: 'Upload Thingy',
-        template: '%s | Upload Thingy',
+        default: 'UploadThingy',
+        template: '%s | UploadThingy',
     },
 };
 

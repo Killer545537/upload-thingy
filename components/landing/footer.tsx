@@ -24,7 +24,7 @@ const Footer = () => {
                             className='text-xl font-bold tracking-tighter-custom text-foreground'
                             href='/'
                         >
-                            Upload Thingy
+                            UploadThingy
                         </a>
                         <p className='text-sm text-muted-foreground mt-1'>
                             Designed for simplicity.
@@ -56,7 +56,7 @@ const Footer = () => {
                 {/* Bottom Bar */}
                 <div className='pt-8 border-t border-border'>
                     <p className='text-sm text-muted-foreground text-center'>
-                        © 2025 Upload Thingy. Crafted with care.
+                        © 2025 UploadThingy. Crafted with care.
                     </p>
                 </div>
             </div>
