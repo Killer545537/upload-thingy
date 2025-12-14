@@ -1,3 +1,5 @@
-const Page = () => <div>Login Page</div>;
+import LoginForm from '@/components/auth/login-form';
+
+const Page = () => <LoginForm />;
 
 export default Page;
