@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
+import { Logo } from '@/components/logo';
 import { Button } from '@/components/ui/button';
 
 const navLinks = [
@@ -27,6 +28,7 @@ const Navbar = () => {
                     className='text-xl font-bold tracking-tighter-custom text-foreground'
                     href='/'
                 >
+                    <Logo className='inline-block w-12 h-12 mr-2 mb-1' />
                     UploadThingy
                 </a>
 
