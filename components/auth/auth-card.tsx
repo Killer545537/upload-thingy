@@ -3,10 +3,12 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import GoogleAuthButton from './google-auth-button';
 
 const AuthCard = ({ children }: { children: React.ReactNode }) => {
     const pathname = usePathname();
     const isSignup = pathname?.includes('/signup');
+    const isLogin = pathname?.includes('/login');
 
     return (
         <motion.div
@@ -36,14 +38,51 @@ const AuthCard = ({ children }: { children: React.ReactNode }) => {
                 >
                     <Link className='inline-block' href='/'>
                         <h1 className='text-2xl font-bold tracking-tighter-custom text-foreground'>
-                            Upload Thingy
+                            UploadThingy
                         </h1>
                     </Link>
                     <p className='text-muted-foreground mt-2 text-sm'>
                         {isSignup ? 'Create Your Account' : 'Welcome Back'}
                     </p>
                 </motion.div>
+                <GoogleAuthButton />
+                {/* Divider */}
+                <motion.div
+                    animate={{ opacity: 1, y: 0 }}
+                    className='relative my-6'
+                    initial={{ opacity: 0, y: 20 }}
+                    transition={{ delay: 0.1, duration: 0.3 }}
+                >
+                    <div className='absolute inset-0 flex items-center'>
+                        <div className='w-full border-t border-border' />
+                    </div>
+                    <div className='relative flex justify-center text-xs uppercase'>
+                        <span className='bg-card px-2 text-muted-foreground'>
+                            or continue with email
+                        </span>
+                    </div>
+                </motion.div>
                 {children}
+                {/* Toggle Auth Mode */}
+                <motion.div
+                    className='mt-6 text-center'
+                    variants={{
+                        hidden: { opacity: 0, y: 20 },
+                        visible: { opacity: 1, y: 0 },
+                    }}
+                >
+                    <p className='text-sm text-muted-foreground'>
+                        {isLogin
+                            ? "Don't have an account?"
+                            : 'Already have an account?'}{' '}
+                        <Link
+                            className='text-foreground font-medium hover:underline underline-offset-4 transition-all'
+                            href={isLogin ? '/signup' : '/login'}
+                        >
+                            {isLogin ? 'Sign up' : 'Sign in'}
+                        </Link>
+                    </p>
+                </motion.div>
             </div>
         </motion.div>
     );

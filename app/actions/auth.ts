@@ -20,3 +20,27 @@ export const loginUser = async (email: string, password: string) => {
         };
     }
 };
+
+export const signUpUser = async (
+    name: string,
+    email: string,
+    password: string,
+) => {
+    try {
+        await auth.api.signUpEmail({
+            body: {
+                email,
+                name,
+                password,
+            },
+        });
+
+        return { message: 'Account created successfully', success: true };
+    } catch (e) {
+        const error = e as Error;
+        return {
+            message: error.message || 'An error occurred during signup',
+            success: false,
+        };
+    }
+};

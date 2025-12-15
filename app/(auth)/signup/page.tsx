@@ -1,3 +1,5 @@
-const Page = () => <div>Signup Page</div>;
+import SignUpForm from '@/components/auth/sign-up-form';
+
+const Page = () => <SignUpForm />;
 
 export default Page;
