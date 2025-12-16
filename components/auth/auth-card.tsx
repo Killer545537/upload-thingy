@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import GoogleAuthButton from './google-auth-button';
+import GoogleAuthButton from '@/components/auth/google-auth-button';
 
 const AuthCard = ({ children }: { children: React.ReactNode }) => {
     const pathname = usePathname();

@@ -60,7 +60,8 @@
             },
             "recommended": true,
             "style": {
-                "noNonNullAssertion": "off"
+                "noNonNullAssertion": "off",
+                "useImportType": "error"
             },
             "suspicious": {
                 "noArrayIndexKey": "off",
