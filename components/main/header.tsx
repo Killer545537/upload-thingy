@@ -1,5 +1,6 @@
 import { Search } from 'lucide-react';
-import { Kbd, KbdGroup } from '../ui/kbd';
+import UserAvatar from '@/components/main/user-avatar';
+import { Kbd, KbdGroup } from '@/components/ui/kbd';
 
 interface HeaderProps {
     onSearchClick: () => void;
@@ -15,10 +16,16 @@ const Header = ({ onSearchClick }: HeaderProps) => (
             <Search className='w-4 h-4' />
             <span>Search files...</span>
             <KbdGroup className='ml-auto px-1.5 py-0.5 text-[10px] font-mono bg-background border border-border rounded'>
-                <Kbd>⌘</Kbd>
-                <Kbd>K</Kbd>
+                <Kbd>⌘ + K</Kbd>
             </KbdGroup>
         </button>
+
+        <div className='flex items-center gap-4'>
+            <UserAvatar
+                userEmail='srajanmahajan1@gmail.com'
+                userName='Srijan Mahajan'
+            />
+        </div>
     </header>
 );
 
