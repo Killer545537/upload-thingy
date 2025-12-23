@@ -2,8 +2,11 @@
 
 import { motion } from 'framer-motion';
 import { LogOut, Settings } from 'lucide-react';
+import Link from 'next/link';
 import { useState } from 'react';
+import { logoutUser } from '@/app/actions/auth';
 import { Avatar } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -26,14 +29,22 @@ const UserAvatar = ({ userName, userEmail }: UserAvatarProps) => {
         .join('')
         .toUpperCase();
 
+    const handleLogout = async () => {
+        await logoutUser();
+    };
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <button className='focus:outline-none' type='button'>
+                <Button
+                    className='rounded-full p-0'
+                    size='icon'
+                    variant='ghost'
+                >
                     <Avatar className='w-10 h-10 bg-gray-200 flex items-center justify-center text-sm font-medium text-gray-600 hover:bg-gray-300 transition-colors overflow-hidden cursor-pointer'>
                         {initials}
                     </Avatar>
-                </button>
+                </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent
                 align='end'
@@ -50,7 +61,7 @@ const UserAvatar = ({ userName, userEmail }: UserAvatarProps) => {
 
                 <DropdownMenuSeparator />
 
-                {/* Menu Items */}
+                {/* Settings */}
                 <div className='p-2'>
                     <div
                         className='relative'
@@ -70,9 +81,20 @@ const UserAvatar = ({ userName, userEmail }: UserAvatarProps) => {
                                 }}
                             />
                         )}
-                        <DropdownMenuItem className='relative z-10 cursor-pointer'>
-                            <Settings className='w-4 h-4 text-muted-foreground' />
-                            <span>Settings</span>
+                        <DropdownMenuItem
+                            asChild
+                            className='relative z-10 cursor-pointer p-0'
+                        >
+                            <Button
+                                asChild
+                                className='w-full justify-start'
+                                variant='ghost'
+                            >
+                                <Link href='/settings'>
+                                    <Settings className='w-4 h-4 text-muted-foreground' />
+                                    <span>Settings</span>
+                                </Link>
+                            </Button>
                         </DropdownMenuItem>
                     </div>
                 </div>
@@ -100,11 +122,18 @@ const UserAvatar = ({ userName, userEmail }: UserAvatarProps) => {
                             />
                         )}
                         <DropdownMenuItem
-                            className='relative z-10 cursor-pointer group'
+                            asChild
+                            className='relative z-10 cursor-pointer group p-0'
                             variant='destructive'
                         >
-                            <LogOut className='w-4 h-4' />
-                            <span>Log Out</span>
+                            <Button
+                                className='w-full justify-start text-destructive hover:text-destructive'
+                                onClick={handleLogout}
+                                variant='ghost'
+                            >
+                                <LogOut className='w-4 h-4' />
+                                <span>Log Out</span>
+                            </Button>
                         </DropdownMenuItem>
                     </div>
                 </div>
