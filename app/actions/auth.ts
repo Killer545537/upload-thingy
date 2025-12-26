@@ -44,16 +44,3 @@ export const signUpUser = async (
         };
     }
 };
-
-export const logoutUser = async () => {
-    try {
-        await auth.api.signOut();
-        return { message: 'Logged out successfully', success: true };
-    } catch (e) {
-        const error = e as Error;
-        return {
-            message: error.message || 'An error occurred during logout',
-            success: false,
-        };
-    }
-};

@@ -21,10 +21,7 @@ const Header = ({ onSearchClick }: HeaderProps) => (
         </button>
 
         <div className='flex items-center gap-4'>
-            <UserAvatar
-                userEmail='srajanmahajan1@gmail.com'
-                userName='Srijan Mahajan'
-            />
+            <UserAvatar />
         </div>
     </header>
 );
