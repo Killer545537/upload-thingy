@@ -15,7 +15,13 @@ const Dashboard = () => (
             </h1>
         </motion.div>
         <div className='w-36'>
-            <FileCard extension={'PDF'} id={''} name={'Name'} size={''} />
+            <FileCard
+                id={'idk'}
+                mimeType={'PDF'}
+                originalName={'Name'}
+                sizeInBytes={''}
+                starred={true}
+            />
         </div>
     </main>
 );

@@ -1,6 +1,6 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
     Download,
     FileArchive,
@@ -9,8 +9,10 @@ import {
     Image,
     Link,
     Pencil,
+    Star,
     Trash2,
 } from 'lucide-react';
+import type { File } from '@/app/types/file';
 import {
     ContextMenu,
     ContextMenuContent,
@@ -20,14 +22,11 @@ import {
 } from '@/components/ui/context-menu';
 import { cn } from '@/lib/utils';
 
-type FileStatus = 'uploaded' | 'uploading' | 'error' | 'processing';
-
-interface FileCardProps {
-    id: string;
-    name: string;
-    extension?: string;
-    size: string;
-    status?: FileStatus;
+interface FileCardProps
+    extends Omit<
+        File,
+        'createdAt' | 'updatedAt' | 'deletedAt' | 'url' | 'userId' | 'key'
+    > {
     onDelete?: (id: string) => void;
     onRename?: (id: string) => void;
     onDownload?: (id: string) => void;
@@ -56,41 +55,41 @@ const getFileIcon = (extension?: string) => {
 };
 
 export default function FileCard({
-    id,
-    name,
-    extension = '',
-    size,
-    status = 'uploaded',
+    id: fileId,
+    originalName: fileName,
+    mimeType: fileExtension = '',
+    sizeInBytes: fileSize,
+    starred,
     onDelete,
     onRename,
     onDownload,
     onCopyLink,
 }: FileCardProps) {
-    const ext = extension?.toLowerCase() ?? '';
+    const ext = fileExtension?.toLowerCase() ?? '';
     const extColorClass = extensionColors[ext] || extensionColors.default;
-    const Icon = getFileIcon(extension);
+    const Icon = getFileIcon(fileExtension);
 
     const menuItems = [
         {
-            action: () => onDownload?.(id),
+            action: () => onDownload?.(fileId),
             danger: false,
             icon: Download,
             label: 'Download',
         },
         {
-            action: () => onRename?.(id),
+            action: () => onRename?.(fileId),
             danger: false,
             icon: Pencil,
             label: 'Rename',
         },
         {
-            action: () => onCopyLink?.(id),
+            action: () => onCopyLink?.(fileId),
             danger: false,
             icon: Link,
             label: 'Copy Link',
         },
         {
-            action: () => onDelete?.(id),
+            action: () => onDelete?.(fileId),
             danger: true,
             icon: Trash2,
             label: 'Delete',
@@ -111,7 +110,6 @@ export default function FileCard({
                         className={cn(
                             'aspect-square bg-background border border-border rounded-xl overflow-hidden cursor-pointer transition-all duration-200',
                             'hover:border-gray-400 hover:shadow-md',
-                            status === 'uploading' && 'pointer-events-none',
                         )}
                         whileHover={{ y: -2 }}
                     >
@@ -121,23 +119,18 @@ export default function FileCard({
                                     className='w-12 h-12 text-gray-300'
                                     strokeWidth={1.5}
                                 />
-                                <AnimatePresence>
-                                    {status === 'uploaded' && (
-                                        <motion.div
-                                            animate={{ opacity: [0, 0.8, 0] }}
-                                            className='absolute inset-0 bg-white pointer-events-none'
-                                            exit={{ opacity: 0 }}
-                                            initial={{ opacity: 0 }}
-                                            transition={{ duration: 0.6 }}
-                                        />
-                                    )}
-                                </AnimatePresence>
                             </div>
 
                             <div className='p-3 border-t border-border'>
                                 <div className='flex items-center gap-2'>
+                                    {starred && (
+                                        <Star
+                                            className='w-4 h-4 text-yellow-400 shrink-0'
+                                            strokeWidth={1.5}
+                                        />
+                                    )}
                                     <p className='text-sm font-medium text-foreground truncate flex-1'>
-                                        {name}
+                                        {fileName}
                                     </p>
                                     <span
                                         className={cn(
@@ -145,11 +138,11 @@ export default function FileCard({
                                             extColorClass,
                                         )}
                                     >
-                                        {extension}
+                                        {fileExtension}
                                     </span>
                                 </div>
                                 <p className='text-xs font-mono text-muted-foreground mt-1'>
-                                    {size}
+                                    {fileSize}
                                 </p>
                             </div>
                         </div>
