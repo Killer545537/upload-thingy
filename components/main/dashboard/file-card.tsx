@@ -12,7 +12,7 @@ import {
     Star,
     Trash2,
 } from 'lucide-react';
-import type { File } from '@/app/types/file';
+import type { FileCardType } from '@/app/types/file';
 import {
     ContextMenu,
     ContextMenuContent,
@@ -21,17 +21,6 @@ import {
     ContextMenuTrigger,
 } from '@/components/ui/context-menu';
 import { cn } from '@/lib/utils';
-
-interface FileCardProps
-    extends Omit<
-        File,
-        'createdAt' | 'updatedAt' | 'deletedAt' | 'url' | 'userId' | 'key'
-    > {
-    onDelete?: (id: string) => void;
-    onRename?: (id: string) => void;
-    onDownload?: (id: string) => void;
-    onCopyLink?: (id: string) => void;
-}
 
 const extensionColors: Record<string, string> = {
     default: 'bg-gray-100 text-gray-600',
@@ -64,7 +53,7 @@ export default function FileCard({
     onRename,
     onDownload,
     onCopyLink,
-}: FileCardProps) {
+}: FileCardType) {
     const ext = fileExtension?.toLowerCase() ?? '';
     const extColorClass = extensionColors[ext] || extensionColors.default;
     const Icon = getFileIcon(fileExtension);
