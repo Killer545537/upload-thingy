@@ -130,7 +130,7 @@ const Hero = () => {
                             </div>
                             <div className='flex-1 flex justify-center'>
                                 <div className='bg-secondary px-4 py-1 rounded-md text-xs text-muted-foreground'>
-                                    app.uploadthingy.com
+                                    uploadthingy.com/dashboard
                                 </div>
                             </div>
                         </div>
