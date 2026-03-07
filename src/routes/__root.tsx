@@ -1,10 +1,21 @@
 import { TanStackDevtools } from '@tanstack/react-devtools';
-import { createRootRoute, HeadContent, Scripts } from '@tanstack/react-router';
+import type { QueryClient } from '@tanstack/react-query';
+import {
+    createRootRouteWithContext,
+    HeadContent,
+    Outlet,
+    Scripts,
+} from '@tanstack/react-router';
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
+import { GooeyToaster } from 'goey-toast';
 
 import appCss from '../styles.css?url';
 
-export const Route = createRootRoute({
+interface RouterContext {
+    queryClient: QueryClient;
+}
+
+export const Route = createRootRouteWithContext<RouterContext>()({
     head: () => ({
         meta: [
             {
@@ -25,8 +36,13 @@ export const Route = createRootRoute({
             },
         ],
     }),
+    component: RootComponent,
     shellComponent: RootDocument,
 });
+
+function RootComponent() {
+    return <Outlet />;
+}
 
 function RootDocument({ children }: { children: React.ReactNode }) {
     return (
@@ -36,6 +52,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             </head>
             <body className='font-sans antialiased wrap-anywhere selection:bg-[rgba(79,184,178,0.24)]'>
                 {children}
+                <GooeyToaster position='bottom-right' />
                 <TanStackDevtools
                     config={{
                         position: 'bottom-right',

@@ -1,7 +1,7 @@
 {
     "formatter": {
         "external": {
-            "command": "./node_modules/.bin/biome",
+            "command": "./node_modules/@biomejs/biome/bin/biome",
             "arguments": [
                 "format",
                 "--write",
