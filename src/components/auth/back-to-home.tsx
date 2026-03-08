@@ -6,7 +6,7 @@ import { Button } from '#/components/ui/button';
 const BackToHome = () => (
     <motion.div
         animate={{ opacity: 1, x: 0 }}
-        className='absolute top-6 left-6 z-10'
+        className='fixed top-6 left-6 z-10'
         initial={{ opacity: 0, x: -20 }}
         transition={{ delay: 0.2 }}
     >

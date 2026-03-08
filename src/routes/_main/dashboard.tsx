@@ -20,7 +20,8 @@ function DashboardPage() {
 
             if (error) {
                 throw new Error(
-                    error.message || 'An unknown error occurred during sign out.',
+                    error.message ||
+                        'An unknown error occurred during sign out.',
                 );
             }
         },

@@ -10,15 +10,22 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as MainRouteRouteImport } from './routes/_main/route'
+import { Route as LegalRouteRouteImport } from './routes/_legal/route'
 import { Route as AuthRouteRouteImport } from './routes/_auth/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as MainDashboardRouteImport } from './routes/_main/dashboard'
+import { Route as LegalTermsRouteImport } from './routes/_legal/terms'
+import { Route as LegalPrivacyRouteImport } from './routes/_legal/privacy'
 import { Route as AuthSignupRouteImport } from './routes/_auth/signup'
 import { Route as AuthLoginRouteImport } from './routes/_auth/login'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
 const MainRouteRoute = MainRouteRouteImport.update({
   id: '/_main',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LegalRouteRoute = LegalRouteRouteImport.update({
+  id: '/_legal',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRouteRoute = AuthRouteRouteImport.update({
@@ -34,6 +41,16 @@ const MainDashboardRoute = MainDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
   getParentRoute: () => MainRouteRoute,
+} as any)
+const LegalTermsRoute = LegalTermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => LegalRouteRoute,
+} as any)
+const LegalPrivacyRoute = LegalPrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => LegalRouteRoute,
 } as any)
 const AuthSignupRoute = AuthSignupRouteImport.update({
   id: '/signup',
@@ -55,6 +72,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof AuthLoginRoute
   '/signup': typeof AuthSignupRoute
+  '/privacy': typeof LegalPrivacyRoute
+  '/terms': typeof LegalTermsRoute
   '/dashboard': typeof MainDashboardRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
@@ -62,6 +81,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof AuthLoginRoute
   '/signup': typeof AuthSignupRoute
+  '/privacy': typeof LegalPrivacyRoute
+  '/terms': typeof LegalTermsRoute
   '/dashboard': typeof MainDashboardRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
@@ -69,24 +90,44 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_auth': typeof AuthRouteRouteWithChildren
+  '/_legal': typeof LegalRouteRouteWithChildren
   '/_main': typeof MainRouteRouteWithChildren
   '/_auth/login': typeof AuthLoginRoute
   '/_auth/signup': typeof AuthSignupRoute
+  '/_legal/privacy': typeof LegalPrivacyRoute
+  '/_legal/terms': typeof LegalTermsRoute
   '/_main/dashboard': typeof MainDashboardRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/signup' | '/dashboard' | '/api/auth/$'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/signup'
+    | '/privacy'
+    | '/terms'
+    | '/dashboard'
+    | '/api/auth/$'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/signup' | '/dashboard' | '/api/auth/$'
+  to:
+    | '/'
+    | '/login'
+    | '/signup'
+    | '/privacy'
+    | '/terms'
+    | '/dashboard'
+    | '/api/auth/$'
   id:
     | '__root__'
     | '/'
     | '/_auth'
+    | '/_legal'
     | '/_main'
     | '/_auth/login'
     | '/_auth/signup'
+    | '/_legal/privacy'
+    | '/_legal/terms'
     | '/_main/dashboard'
     | '/api/auth/$'
   fileRoutesById: FileRoutesById
@@ -94,6 +135,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRouteRoute: typeof AuthRouteRouteWithChildren
+  LegalRouteRoute: typeof LegalRouteRouteWithChildren
   MainRouteRoute: typeof MainRouteRouteWithChildren
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
 }
@@ -105,6 +147,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof MainRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_legal': {
+      id: '/_legal'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof LegalRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_auth': {
@@ -127,6 +176,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/dashboard'
       preLoaderRoute: typeof MainDashboardRouteImport
       parentRoute: typeof MainRouteRoute
+    }
+    '/_legal/terms': {
+      id: '/_legal/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof LegalTermsRouteImport
+      parentRoute: typeof LegalRouteRoute
+    }
+    '/_legal/privacy': {
+      id: '/_legal/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof LegalPrivacyRouteImport
+      parentRoute: typeof LegalRouteRoute
     }
     '/_auth/signup': {
       id: '/_auth/signup'
@@ -166,6 +229,20 @@ const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
   AuthRouteRouteChildren,
 )
 
+interface LegalRouteRouteChildren {
+  LegalPrivacyRoute: typeof LegalPrivacyRoute
+  LegalTermsRoute: typeof LegalTermsRoute
+}
+
+const LegalRouteRouteChildren: LegalRouteRouteChildren = {
+  LegalPrivacyRoute: LegalPrivacyRoute,
+  LegalTermsRoute: LegalTermsRoute,
+}
+
+const LegalRouteRouteWithChildren = LegalRouteRoute._addFileChildren(
+  LegalRouteRouteChildren,
+)
+
 interface MainRouteRouteChildren {
   MainDashboardRoute: typeof MainDashboardRoute
 }
@@ -181,6 +258,7 @@ const MainRouteRouteWithChildren = MainRouteRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRouteRoute: AuthRouteRouteWithChildren,
+  LegalRouteRoute: LegalRouteRouteWithChildren,
   MainRouteRoute: MainRouteRouteWithChildren,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
 }

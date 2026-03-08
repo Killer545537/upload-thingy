@@ -55,7 +55,7 @@ const Footer = () => {
                 {/* Bottom Bar */}
                 <div className='pt-8 border-t border-border'>
                     <p className='text-sm text-muted-foreground text-center'>
-                        © 2025 UploadThingy. Crafted with care.
+                        © 2026 UploadThingy. Crafted with care.
                     </p>
                 </div>
             </div>
