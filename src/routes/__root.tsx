@@ -8,7 +8,8 @@ import {
 } from '@tanstack/react-router';
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
 import { GooeyToaster } from 'goey-toast';
-
+import NotFound from '#/components/not-found';
+import { seo } from '#/lib/utils';
 import appCss from '../styles.css?url';
 
 interface RouterContext {
@@ -25,18 +26,26 @@ export const Route = createRootRouteWithContext<RouterContext>()({
                 name: 'viewport',
                 content: 'width=device-width, initial-scale=1',
             },
-            {
-                title: 'TanStack Start Starter',
-            },
+            ...seo({
+                title: 'Upload Thingy',
+                description:
+                    'A simple file upload service built with React and TanStack Router.',
+            }),
         ],
         links: [
             {
                 rel: 'stylesheet',
                 href: appCss,
             },
+            {
+                rel: 'icon',
+                type: 'image/svg+xml',
+                href: '/icon.svg',
+            },
         ],
     }),
     component: RootComponent,
+    notFoundComponent: NotFound,
     shellComponent: RootDocument,
 });
 
