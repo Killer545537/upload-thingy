@@ -6,4 +6,6 @@ export const env = arkenv({
     BETTER_AUTH_URL: 'string',
     // Database
     DATABASE_URL: 'string.url',
+    // Resend
+    RESEND_API_KEY: 'string',
 });

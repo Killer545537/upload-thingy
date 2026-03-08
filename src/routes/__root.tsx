@@ -8,7 +8,6 @@ import {
 } from '@tanstack/react-router';
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
 import { GooeyToaster } from 'goey-toast';
-import NotFound from '#/components/not-found';
 import { seo } from '#/lib/utils';
 import appCss from '../styles.css?url';
 
