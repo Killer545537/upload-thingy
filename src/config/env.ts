@@ -8,4 +8,7 @@ export const env = arkenv({
     DATABASE_URL: 'string.url',
     // Resend
     RESEND_API_KEY: 'string',
+    // Google
+    GOOGLE_CLIENT_ID: 'string',
+    GOOGLE_CLIENT_SECRET: 'string',
 });
