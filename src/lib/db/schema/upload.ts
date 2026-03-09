@@ -1,4 +1,4 @@
-import { relations } from 'drizzle-orm';
+import { relations, sql } from 'drizzle-orm';
 import {
     boolean,
     index,
@@ -6,14 +6,15 @@ import {
     pgTable,
     text,
     timestamp,
+    uuid,
 } from 'drizzle-orm/pg-core';
 import { user } from './auth-schema';
 
 export const uploads = pgTable(
     'upload',
     {
-        id: text().primaryKey(),
-        userId: text()
+        id: uuid().default(sql`pg_catalog.gen_random_uuid()`).primaryKey(),
+        userId: uuid()
             .notNull()
             .references(() => user.id, { onDelete: 'cascade' }),
         // S3 info

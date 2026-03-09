@@ -37,6 +37,11 @@ export const auth = betterAuth({
             },
         },
     },
+    advanced: {
+        database: {
+            generateId: 'uuid',
+      }
+    },
     socialProviders: {
         google: {
             clientId: env.GOOGLE_CLIENT_ID,

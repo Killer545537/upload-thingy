@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TestRouteImport } from './routes/test'
 import { Route as PasswordResetRouteRouteImport } from './routes/_password-reset/route'
 import { Route as MainRouteRouteImport } from './routes/_main/route'
 import { Route as LegalRouteRouteImport } from './routes/_legal/route'
@@ -23,6 +24,11 @@ import { Route as AuthSignupRouteImport } from './routes/_auth/signup'
 import { Route as AuthLoginRouteImport } from './routes/_auth/login'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
+const TestRoute = TestRouteImport.update({
+  id: '/test',
+  path: '/test',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PasswordResetRouteRoute = PasswordResetRouteRouteImport.update({
   id: '/_password-reset',
   getParentRoute: () => rootRouteImport,
@@ -89,6 +95,7 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/test': typeof TestRoute
   '/login': typeof AuthLoginRoute
   '/signup': typeof AuthSignupRoute
   '/privacy': typeof LegalPrivacyRoute
@@ -100,6 +107,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/test': typeof TestRoute
   '/login': typeof AuthLoginRoute
   '/signup': typeof AuthSignupRoute
   '/privacy': typeof LegalPrivacyRoute
@@ -116,6 +124,7 @@ export interface FileRoutesById {
   '/_legal': typeof LegalRouteRouteWithChildren
   '/_main': typeof MainRouteRouteWithChildren
   '/_password-reset': typeof PasswordResetRouteRouteWithChildren
+  '/test': typeof TestRoute
   '/_auth/login': typeof AuthLoginRoute
   '/_auth/signup': typeof AuthSignupRoute
   '/_legal/privacy': typeof LegalPrivacyRoute
@@ -129,6 +138,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/test'
     | '/login'
     | '/signup'
     | '/privacy'
@@ -140,6 +150,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/test'
     | '/login'
     | '/signup'
     | '/privacy'
@@ -155,6 +166,7 @@ export interface FileRouteTypes {
     | '/_legal'
     | '/_main'
     | '/_password-reset'
+    | '/test'
     | '/_auth/login'
     | '/_auth/signup'
     | '/_legal/privacy'
@@ -171,11 +183,19 @@ export interface RootRouteChildren {
   LegalRouteRoute: typeof LegalRouteRouteWithChildren
   MainRouteRoute: typeof MainRouteRouteWithChildren
   PasswordResetRouteRoute: typeof PasswordResetRouteRouteWithChildren
+  TestRoute: typeof TestRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/test': {
+      id: '/test'
+      path: '/test'
+      fullPath: '/test'
+      preLoaderRoute: typeof TestRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_password-reset': {
       id: '/_password-reset'
       path: ''
@@ -329,6 +349,7 @@ const rootRouteChildren: RootRouteChildren = {
   LegalRouteRoute: LegalRouteRouteWithChildren,
   MainRouteRoute: MainRouteRouteWithChildren,
   PasswordResetRouteRoute: PasswordResetRouteRouteWithChildren,
+  TestRoute: TestRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
 }
 export const routeTree = rootRouteImport
