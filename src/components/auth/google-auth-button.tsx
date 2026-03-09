@@ -10,7 +10,7 @@ const GoogleAuthButton = () => {
 
     const googleMutation = useMutation({
         mutationFn: async () => {
-            const { error} = await authClient.signIn.social({
+            const { error } = await authClient.signIn.social({
                 callbackURL: '/dashboard',
                 provider: 'google',
             });
