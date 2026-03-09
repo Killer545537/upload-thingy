@@ -9,10 +9,13 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PasswordResetRouteRouteImport } from './routes/_password-reset/route'
 import { Route as MainRouteRouteImport } from './routes/_main/route'
 import { Route as LegalRouteRouteImport } from './routes/_legal/route'
 import { Route as AuthRouteRouteImport } from './routes/_auth/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PasswordResetResetPasswordRouteImport } from './routes/_password-reset/reset-password'
+import { Route as PasswordResetForgotPasswordRouteImport } from './routes/_password-reset/forgot-password'
 import { Route as MainDashboardRouteImport } from './routes/_main/dashboard'
 import { Route as LegalTermsRouteImport } from './routes/_legal/terms'
 import { Route as LegalPrivacyRouteImport } from './routes/_legal/privacy'
@@ -20,6 +23,10 @@ import { Route as AuthSignupRouteImport } from './routes/_auth/signup'
 import { Route as AuthLoginRouteImport } from './routes/_auth/login'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
+const PasswordResetRouteRoute = PasswordResetRouteRouteImport.update({
+  id: '/_password-reset',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MainRouteRoute = MainRouteRouteImport.update({
   id: '/_main',
   getParentRoute: () => rootRouteImport,
@@ -37,6 +44,18 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PasswordResetResetPasswordRoute =
+  PasswordResetResetPasswordRouteImport.update({
+    id: '/reset-password',
+    path: '/reset-password',
+    getParentRoute: () => PasswordResetRouteRoute,
+  } as any)
+const PasswordResetForgotPasswordRoute =
+  PasswordResetForgotPasswordRouteImport.update({
+    id: '/forgot-password',
+    path: '/forgot-password',
+    getParentRoute: () => PasswordResetRouteRoute,
+  } as any)
 const MainDashboardRoute = MainDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -75,6 +94,8 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof LegalPrivacyRoute
   '/terms': typeof LegalTermsRoute
   '/dashboard': typeof MainDashboardRoute
+  '/forgot-password': typeof PasswordResetForgotPasswordRoute
+  '/reset-password': typeof PasswordResetResetPasswordRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesByTo {
@@ -84,6 +105,8 @@ export interface FileRoutesByTo {
   '/privacy': typeof LegalPrivacyRoute
   '/terms': typeof LegalTermsRoute
   '/dashboard': typeof MainDashboardRoute
+  '/forgot-password': typeof PasswordResetForgotPasswordRoute
+  '/reset-password': typeof PasswordResetResetPasswordRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesById {
@@ -92,11 +115,14 @@ export interface FileRoutesById {
   '/_auth': typeof AuthRouteRouteWithChildren
   '/_legal': typeof LegalRouteRouteWithChildren
   '/_main': typeof MainRouteRouteWithChildren
+  '/_password-reset': typeof PasswordResetRouteRouteWithChildren
   '/_auth/login': typeof AuthLoginRoute
   '/_auth/signup': typeof AuthSignupRoute
   '/_legal/privacy': typeof LegalPrivacyRoute
   '/_legal/terms': typeof LegalTermsRoute
   '/_main/dashboard': typeof MainDashboardRoute
+  '/_password-reset/forgot-password': typeof PasswordResetForgotPasswordRoute
+  '/_password-reset/reset-password': typeof PasswordResetResetPasswordRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRouteTypes {
@@ -108,6 +134,8 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/terms'
     | '/dashboard'
+    | '/forgot-password'
+    | '/reset-password'
     | '/api/auth/$'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -117,6 +145,8 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/terms'
     | '/dashboard'
+    | '/forgot-password'
+    | '/reset-password'
     | '/api/auth/$'
   id:
     | '__root__'
@@ -124,11 +154,14 @@ export interface FileRouteTypes {
     | '/_auth'
     | '/_legal'
     | '/_main'
+    | '/_password-reset'
     | '/_auth/login'
     | '/_auth/signup'
     | '/_legal/privacy'
     | '/_legal/terms'
     | '/_main/dashboard'
+    | '/_password-reset/forgot-password'
+    | '/_password-reset/reset-password'
     | '/api/auth/$'
   fileRoutesById: FileRoutesById
 }
@@ -137,11 +170,19 @@ export interface RootRouteChildren {
   AuthRouteRoute: typeof AuthRouteRouteWithChildren
   LegalRouteRoute: typeof LegalRouteRouteWithChildren
   MainRouteRoute: typeof MainRouteRouteWithChildren
+  PasswordResetRouteRoute: typeof PasswordResetRouteRouteWithChildren
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/_password-reset': {
+      id: '/_password-reset'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof PasswordResetRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_main': {
       id: '/_main'
       path: ''
@@ -169,6 +210,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_password-reset/reset-password': {
+      id: '/_password-reset/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof PasswordResetResetPasswordRouteImport
+      parentRoute: typeof PasswordResetRouteRoute
+    }
+    '/_password-reset/forgot-password': {
+      id: '/_password-reset/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof PasswordResetForgotPasswordRouteImport
+      parentRoute: typeof PasswordResetRouteRoute
     }
     '/_main/dashboard': {
       id: '/_main/dashboard'
@@ -255,11 +310,25 @@ const MainRouteRouteWithChildren = MainRouteRoute._addFileChildren(
   MainRouteRouteChildren,
 )
 
+interface PasswordResetRouteRouteChildren {
+  PasswordResetForgotPasswordRoute: typeof PasswordResetForgotPasswordRoute
+  PasswordResetResetPasswordRoute: typeof PasswordResetResetPasswordRoute
+}
+
+const PasswordResetRouteRouteChildren: PasswordResetRouteRouteChildren = {
+  PasswordResetForgotPasswordRoute: PasswordResetForgotPasswordRoute,
+  PasswordResetResetPasswordRoute: PasswordResetResetPasswordRoute,
+}
+
+const PasswordResetRouteRouteWithChildren =
+  PasswordResetRouteRoute._addFileChildren(PasswordResetRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRouteRoute: AuthRouteRouteWithChildren,
   LegalRouteRoute: LegalRouteRouteWithChildren,
   MainRouteRoute: MainRouteRouteWithChildren,
+  PasswordResetRouteRoute: PasswordResetRouteRouteWithChildren,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
 }
 export const routeTree = rootRouteImport
