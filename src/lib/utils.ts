@@ -1,10 +1,6 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
-export function cn(...inputs: ClassValue[]) {
-    return twMerge(clsx(inputs));
-}
-
 export const seo = ({
     title,
     description,
@@ -38,3 +34,19 @@ export const seo = ({
 
     return tags;
 };
+
+export function cn(...inputs: ClassValue[]) {
+    return twMerge(clsx(inputs));
+}
+
+const MIME_OVERRIDES: Record<string, string> = {
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+        'docx',
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'xlsx',
+    'application/vnd.openxmlformats-officedocument.presentationml.presentation':
+        'pptx',
+};
+
+export function getFileTypeBadge(mimeType: string) {
+    return MIME_OVERRIDES[mimeType] ?? mimeType.split('/')[1];
+}
