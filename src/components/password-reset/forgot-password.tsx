@@ -67,7 +67,9 @@ export default function ForgotPasswordForm() {
             <form.Field name='email'>
                 {(field) => (
                     <Field data-invalid={field.state.meta.errors.length > 0}>
-                        <FieldLabel htmlFor={field.name}>Email Address</FieldLabel>
+                        <FieldLabel htmlFor={field.name}>
+                            Email Address
+                        </FieldLabel>
                         <FieldContent>
                             <div className='relative'>
                                 <Mail className='absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground' />
@@ -96,7 +98,9 @@ export default function ForgotPasswordForm() {
                 className='w-full h-12 mt-6'
                 disabled={forgotPasswordMutation.isPending}
             >
-                {forgotPasswordMutation.isPending ? 'Sending...' : 'Send Reset Link'}
+                {forgotPasswordMutation.isPending
+                    ? 'Sending...'
+                    : 'Send Reset Link'}
             </Button>
         </form>
     );

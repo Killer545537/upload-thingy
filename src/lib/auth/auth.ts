@@ -19,8 +19,8 @@ export const auth = betterAuth({
                 from: 'UploadThingy <password@resend.dev>',
                 to: user.email,
                 subject: 'Reset your password for UploadThingy',
-                react: PasswordResetEmail({name: user.name, resetUrl: url})
-            })
+                react: PasswordResetEmail({ name: user.name, resetUrl: url }),
+            });
         },
     },
     databaseHooks: {
@@ -40,7 +40,7 @@ export const auth = betterAuth({
     advanced: {
         database: {
             generateId: 'uuid',
-      }
+        },
     },
     socialProviders: {
         google: {

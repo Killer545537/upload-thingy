@@ -41,4 +41,4 @@ export default function ResetCard({ children }: { children: React.ReactNode }) {
             </div>
         </motion.div>
     );
-};
+}

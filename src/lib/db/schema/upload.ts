@@ -43,6 +43,9 @@ export const uploads = pgTable(
     ],
 );
 
+export type Upload = typeof uploads.$inferSelect;
+export type NewUpload = typeof uploads.$inferInsert;
+
 export const uploadRelations = relations(uploads, ({ one }) => ({
     user: one(user, {
         fields: [uploads.userId],

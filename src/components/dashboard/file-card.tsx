@@ -10,6 +10,7 @@ import {
     Star,
     Trash2,
 } from 'lucide-react';
+import type * as React from 'react';
 import {
     ContextMenu,
     ContextMenuContent,
@@ -17,6 +18,7 @@ import {
     ContextMenuPortal,
     ContextMenuTrigger,
 } from '#/components/ui/context-menu';
+import type { Upload } from '#/lib/db/schema/upload';
 import { cn } from '#/lib/utils';
 
 const extensionColors: Record<string, string> = {
@@ -41,16 +43,25 @@ const getFileIcon = (extension?: string) => {
 };
 
 export default function FileCard({
-    id: fileId,
-    originalName: fileName,
-    mimeType: fileExtension = '',
-    sizeInBytes: fileSize,
-    starred,
+    upload,
     onDelete,
     onRename,
     onDownload,
     onCopyLink,
-}: any) {
+}: {
+    upload: Upload;
+    onDelete?: (id: Upload['id']) => void;
+    onRename?: (id: Upload['id']) => void;
+    onDownload?: (id: Upload['id']) => void;
+    onCopyLink?: (id: Upload['id']) => void;
+}) {
+    const {
+        id: fileId,
+        fileName,
+        mimeType: fileExtension,
+        fileSize,
+        isStarred: starred,
+    } = upload;
     const ext = fileExtension?.toLowerCase() ?? '';
     const extColorClass = extensionColors[ext] || extensionColors.default;
     const Icon = getFileIcon(fileExtension);
@@ -93,7 +104,11 @@ export default function FileCard({
                         className='relative group'
                         exit={{ opacity: 0, scale: 0.98 }}
                         initial={{ opacity: 0, scale: 0.98 }}
-                        transition={{ damping: 30, stiffness: 400, type: 'spring' }}
+                        transition={{
+                            damping: 30,
+                            stiffness: 400,
+                            type: 'spring',
+                        }}
                     >
                         <motion.div
                             className={cn(
