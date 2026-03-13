@@ -5,19 +5,18 @@ import { LogOut } from 'lucide-react';
 import FileGrid from '#/components/dashboard/file-grid';
 import { Button } from '#/components/ui/button';
 import { authClient } from '#/lib/auth/client';
-import type { Upload } from '#/lib/db/schema/upload';
 import { authQueries } from '#/queries/auth';
-import { getUploads } from '#/server/uploads.functions';
+import { uploadsQueryOptions } from '#/queries/upload';
 
 export const Route = createFileRoute('/_main/dashboard')({
     component: DashboardPage,
-    loader: async () => getUploads(),
+    loader: async ({ context }) => await context.queryClient.ensureQueryData(uploadsQueryOptions),
 });
 
 function DashboardPage() {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
-    const uploads = Route.useLoaderData() as Upload[];
+    const uploads = Route.useLoaderData();
 
     const signOutMutation = useMutation({
         mutationFn: async () => {

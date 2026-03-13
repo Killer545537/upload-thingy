@@ -1,5 +1,6 @@
 import { TanStackDevtools } from '@tanstack/react-devtools';
 import type { QueryClient } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import {
     createRootRouteWithContext,
     HeadContent,
@@ -29,6 +30,7 @@ export const Route = createRootRouteWithContext<RouterContext>()({
                 title: 'Upload Thingy',
                 description:
                     'A simple file upload service built with React and TanStack Router.',
+                image: 'icon.svg'
             }),
         ],
         links: [
@@ -71,6 +73,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                         },
                     ]}
                 />
+                <ReactQueryDevtools initialIsOpen={false} buttonPosition='bottom-left' />
                 <Scripts />
             </body>
         </html>
