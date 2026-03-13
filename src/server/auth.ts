@@ -1,4 +1,4 @@
-import { createServerFn } from '@tanstack/react-start';
+import { createMiddleware, createServerFn } from '@tanstack/react-start';
 import { getRequest } from '@tanstack/react-start/server';
 import { auth } from '#/lib/auth/auth';
 
@@ -15,5 +15,17 @@ export const getUserSession = createServerFn({ method: 'GET' }).handler(
         if (!userSession) return null;
 
         return { user: userSession.user, session: userSession.session };
+    },
+);
+
+export const authMiddleware = createMiddleware({ type: 'function' }).server(
+    async ({ next }) => {
+        const session = await getUserSession();
+
+        if (!session?.user) {
+            throw new Error('Unauthorized');
+        }
+
+        return next({ context: { session } });
     },
 );

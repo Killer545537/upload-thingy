@@ -1,9 +1,9 @@
 import { createServerFn } from '@tanstack/react-start';
-import { type } from 'arktype';
+import { authMiddleware } from './auth';
 import { getUploadsByUserId } from './uploads.server';
 
 export const getUploads = createServerFn({ method: 'GET' })
-    .inputValidator(type({ userId: 'string.uuid.v4' }))
-    .handler(async ({ data }) => {
-        return getUploadsByUserId(data.userId);
+    .middleware([authMiddleware])
+    .handler(async ({ context }) => {
+        return getUploadsByUserId(context.session.user.id);
     });
