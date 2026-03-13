@@ -42,19 +42,21 @@ const getFileIcon = (extension?: string) => {
     return FileIconFallback;
 };
 
+interface FileCardProps {
+    upload: Upload;
+    onDelete?: (id: Upload['id']) => void;
+    onRename?: (id: Upload['id']) => void;
+    onDownload?: (id: Upload['id']) => void;
+    onCopyLink?: (id: Upload['id']) => void;
+}
+
 export default function FileCard({
     upload,
     onDelete,
     onRename,
     onDownload,
     onCopyLink,
-}: {
-    upload: Upload;
-    onDelete?: (id: Upload['id']) => void;
-    onRename?: (id: Upload['id']) => void;
-    onDownload?: (id: Upload['id']) => void;
-    onCopyLink?: (id: Upload['id']) => void;
-}) {
+}: FileCardProps) {
     const {
         id: fileId,
         fileName,
